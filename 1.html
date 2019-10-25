@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table id="myTable" style=" cellpacing: 0; text-align: center; ">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th style="width: 15%;">Flag</th>
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Population</th>
+      </tr>
+    </thead>
+    <tbody id="main-body">
+    </tbody>
+    </table>
+    <script>
+        fetch('https://restcountries.eu/rest/v2/all')
+        .then(response => {
+            return response.json();
+        })
+        .then(value =>{
+            var table = document.getElementById('myTable');
+            for ( var i = 0; i < value.length; i++){
+                var tr = document.createElement('tr');  
+          var code = document.createElement('td');
+                    code.innerHTML = value[i].alpha2Code;
+          var name = document.createElement('td');
+                    name.innerHTML = value[i].name;
+          var capital = document.createElement('td');
+                    capital.innerHTML = value[i].capital;
+          var population = document.createElement('td');
+                    population.innerHTML = value[i].population;
+          var flag = document.createElement('td');
+                    var img = document.createElement('img') 
+                    img.setAttribute('src', value[i].flag);
+                    img.style = "width: 100%;"
+                    flag.append(img);
+                    tr.append(code);
+                    tr.append(flag);
+                    tr.append(name);
+                    tr.append(capital);
+                    tr.append(population);
+                    table.append(tr);
+                console.log(value[i].name);
+            }
+        })
+    </script>
+</body>
+</html>
